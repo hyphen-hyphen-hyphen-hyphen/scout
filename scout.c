@@ -11,6 +11,23 @@ int final_out (char *flags, char *strings) {
 	printf("Potential Flags:\n\n%s\n\nInteresting Strings:\n\n%s", flags, strings);
 	return 0;
 }
+char *flag_pat[20];
+int flag_c;
+char *interesting_pat[20];
+int interesting_c;
+#define GET_JSON_ARR_GEN(name, name_pat, name_c) \
+char* get_##name (cjs* arr_name) { \
+	int size = cJSON_GetArraySize(arr_name); \
+	for (int i = 0; i < size && i < 20; i++) { \
+		cjs *item = cJSON_GetArrayItem(arr_name , i); \
+		if (cJSON_IsString(item)) { \
+			name_pat[i] = item->valuestring; \
+ 			name_c++; \
+		} \
+	} \
+}
+GET_JSON_ARR_GEN(flag, flag_pat, flag_c);
+GET_JSON_ARR_GEN(interesting, interesting_pat, interesting_c);
 void read_config (void) {
 	FILE *conf = fopen("conf.json", "r");
 	conf ? (void)0 : exit(EXIT_FAILURE);
@@ -20,8 +37,9 @@ void read_config (void) {
 	buf[len] = '\0';
 	cjs *conf_json = cJSON_Parse(buf);
 	cjs *flag = cjsGetObjItem(conf_json, "flag");
-	printf("%s", flag->valuestring);
-	
+	cjs *interesting = cjsGetObjItem(conf_json, "interesting");
+	get_flag(flag);
+	get_interesting(interesting);	
 }
 char* flag = "flag{this_is_a_flag}";
 char* find_needle_in_haystack(const char *haystack, char *out, size_t out_size) {

@@ -1,12 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <cjson/cJSON.h>
+#define cjsGetObjItem cJSON_GetObjectItemCaseSensitive
+typedef cJSON cjs;
 
 static char *HELP = "Scout \n\n" "This is the help message that is soon to come";
 char *strings = "hello, world";
 int final_out (char *flags, char *strings) {
 	printf("Potential Flags:\n\n%s\n\nInteresting Strings:\n\n%s", flags, strings);
 	return 0;
+}
+void read_config (void) {
+	FILE *conf = fopen("conf.json", "r");
+	conf ? (void)0 : exit(EXIT_FAILURE);
+	char buf[1024];
+	int len = fread(buf, 1, sizeof(buf), conf);
+	fclose(conf);
+	buf[len] = '\0';
+	cjs *conf_json = cJSON_Parse(buf);
+	cjs *flag = cjsGetObjItem(conf_json, "flag");
+	printf("%s", flag->valuestring);
+	
 }
 char* flag = "flag{this_is_a_flag}";
 char* find_needle_in_haystack(const char *haystack, char *out, size_t out_size) {
@@ -172,6 +187,7 @@ int main (int argc, char *argv[]) {
 	}
 	char *flgs = flganalyze(argv[1], "def", "def");
 	char *interestings = intrest_anal(argv[1]);
+	read_config();
 	final_out(flgs, interestings);
 	return 0;
 }

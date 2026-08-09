@@ -4,7 +4,7 @@ CC ?= gcc
 all: scout
 
 scout: scout.c
-	$(CC) scout.c -o scout
+	$(CC) scout.c -o -lcjson scout
 
 
 install: all

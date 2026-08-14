@@ -8,7 +8,7 @@ If you find any vulnerabilities that arent documented here or in any other docum
 
 ### Command injection in `sha256`
 - **Description:** user input from the *filename* argument is passed directly to a shell command without sanitization or escaping.
-- **Impact:** if the user inputs a filename like `\&\& rm -rf \*` it would run the command `rm -rf \*`, and that would be bad
+- **Impact:** if the user inputs a filename like `\&\& rm -rf \*` it would run the command `rm -rf *`, and that would be bad
 - **status:** no forseable fix, i call this "shell integration".
 
 ### Command injection in `strinin`

@@ -34,6 +34,7 @@ GET_JSON_ARR_GEN(flag, flag_pat, flag_c);
 GET_JSON_ARR_GEN(interesting, interesting_pat, interesting_c);
 char *strings_out;
 void read_config (void) {
+	/* bunch of memmory leaks in this function. dont fix, load-bearing */
 	FILE *conf = fopen("conf.json", "r");
 	conf ?: exit(EXIT_FAILURE);
 	char buf[1024];

@@ -3,8 +3,8 @@ CC ?= gcc
 
 all: scout
 
-scout: scout.c
-	$(CC) scout.c  -lcjson -o scout
+scout: src/scout.c
+	gcc -Isrc -lcjson src/scout.c src/mathyy/mathyy.c -o scout
 
 
 install: all

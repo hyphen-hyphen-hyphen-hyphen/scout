@@ -7,6 +7,8 @@
 typedef cJSON cjs;
 /* manually implementing ln, factorial ,e calculation and powers to avoid dependency bloat; see mathyy */
 #include "mathyy/mathyy.h"
+/* hello from the entropy department */
+#include "entropy/entropy.h"
 
 
 static char *HELP = "Scout \n\n" "This is the help message that is soon to come";
@@ -197,7 +199,8 @@ int main (int argc, char *argv[]) {
 	compute_e();
 	char *interestings = intrest_anal(argv[1]);
 	final_out(flgs, interestings);
-	printf("\n\nlnsha: %.18Lf\n", (long double)lnsha(sha256(argv[1])));
+	printf("\n\nentropy = %.18Lf", entropy_calc(strings_out, strlen(strings_out)));
+	printf("\nlnsha: %.18Lf\n", (long double)lnsha(sha256(argv[1])));
 	printf("Calculated value of e for verification: %.18Lf", compute_e());
 	return 0;
 }

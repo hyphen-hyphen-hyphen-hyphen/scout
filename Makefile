@@ -4,7 +4,7 @@ CC ?= gcc
 all: scout
 
 scout: src/scout.c
-	gcc -Isrc -lcjson src/scout.c src/mathyy/mathyy.c -o scout
+	gcc -Isrc -lcjson src/scout.c src/mathyy/mathyy.c src/entropy/entropy.c -o scout
 
 
 install: all

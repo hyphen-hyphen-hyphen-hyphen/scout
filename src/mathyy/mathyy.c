@@ -8,8 +8,9 @@ long double power (int base, long double exp) {
 	return reslt;
 }
 long double ln (long double xx) {
+	/* returns constant (~10.48) for large values, fix before prod */
 	long double lnans = 0;
-	for (int i = 1; i<10; i += 2) {
+	for (int i = 1; i<10000; i += 2) {
 		lnans += (power(i, (xx-1)/(xx+1)))/i;
 	}
 	lnans *= 2;

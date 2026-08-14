@@ -1,0 +1,22 @@
+{
+    "flag": [
+        "flag{",
+        "FLAG{",
+        "ctf{",
+        "CTF{",
+        "secret{",
+        "key{"
+    ],
+    "interesting": [
+        "password",
+        "admin",
+        "root",
+        "login",
+        "http://",
+        "https://",
+        "ftp://",
+        "/bin",
+        "BEGIN RSA",
+        "/etc/passwd"
+    ]
+}

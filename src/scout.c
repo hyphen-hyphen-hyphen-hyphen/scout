@@ -219,7 +219,23 @@ char *flganalyze (char *filename, char *anal_opts, char *str_opts) {
 	char *flags = strn(filename, str_opts);
 	return flags;
 }
-
+void automatic_malware_analysis_report() {
+	printf("\n\n----------------------------------------\n");
+	printf("|                                      |\n");
+	printf("|            MALWARE REPORT            |\n");
+	printf("|                                      |\n");
+	printf("----------------------------------------\n");
+	printf("|                                      |\n");
+	printf("|                RESULT:               |\n");
+	printf("|                                      |\n");
+	printf("|            probably malware          |\n");
+	printf("|                                      |\n");
+	printf("|             JUSTIFICATION:           |\n");
+	printf("|                                      |\n");
+	printf("|         user ran scout on it         |\n");
+	printf("|                                      |\n");
+	printf("----------------------------------------\n");
+}
 int main (int argc, char *argv[]) {
 	if (argv[1] == NULL) {
 		printf("%s", HELP);
@@ -236,5 +252,6 @@ int main (int argc, char *argv[]) {
 	printf("\n\nentropy = %.18Lf", entropy_calc(strings_out, strlen(strings_out)));
 	printf("\nlnsha: %.18Lf\n", (long double)lnsha(sha256(argv[1])));
 	printf("Calculated value of e for verification: %.18Lf", compute_e());
+	if (strcmp(argv[2] , "--report") == 0) automatic_malware_analysis_report();
 	return 0;
 }

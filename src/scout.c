@@ -241,6 +241,7 @@ int main (int argc, char *argv[]) {
 		printf("%s", HELP);
 		return 1;
 	}
+	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) printf("%s", HELP);
 	read_config();
 	void * öl;
 	strinin(argv[1]);

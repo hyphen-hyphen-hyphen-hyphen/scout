@@ -9,6 +9,7 @@ typedef cJSON cjs;
 #include "mathyy/mathyy.h"
 /* hello from the entropy department */
 #include "entropy/entropy.h"
+#define MAX_TOKENS 102424
 
 
 static char *HELP = "Scout \n\n" "This is the help message that is soon to come";
@@ -118,6 +119,26 @@ char* find_other_needle_in_haystack(const char *haystack, char *out, size_t out_
     }
     return out;
 }
+void tokenize (char *inp, char **tokens) {
+	int i = 0;
+	char *p = inp;
+	char *start;
+	while (*p != '\0') {
+		while (*p == ' ' || *p == '\t' || *p == '\n') p++;
+		
+			start = p;
+			while (*p != ' ' && *p != '\t' && *p != '\n' && *p != '\0') p++;
+			if (*p != '\0') {
+				*p = '\0';
+				p++;
+		}
+		
+		while (*p == ' ' || *p == '\t' || *p == '\n') p++;
+		tokens[i++] = strdup(start);
+
+	}
+	tokens[i] = NULL;
+}
 char *strinin(char* filename){
 	char buffer[25600];
 	char comm[256];
@@ -157,7 +178,18 @@ char *strn (char* filename, char* str_opts) {
 non_stndrd:
 	return "not implemented";
 }
-
+void entropy_anal() {
+	char *tokens[MAX_TOKENS];
+	tokenize(strings_out, tokens);
+	int i = 0;
+	long double entr = 0;
+	while (tokens[i]) {
+		entr = entropy_calc(tokens[i], strlen(tokens[i]));
+		if (entr > 5) printf("high entropy of %.18Lf: %s\n", entr, tokens[i]);
+		else if (entr < 3) printf("low entropy of %.18Lf: %s\n", entr, tokens[i]);
+		i++;
+	}
+}
 
 char *strin (char* filename, char* str_opts) {
 	if (strcmp(str_opts, "def") != 0) {
@@ -194,10 +226,12 @@ int main (int argc, char *argv[]) {
 		return 1;
 	}
 	read_config();
+	void * öl;
 	strinin(argv[1]);
 	char *flgs = flganalyze(argv[1], "def", "def");
 	compute_e();
 	char *interestings = intrest_anal(argv[1]);
+	entropy_anal();
 	final_out(flgs, interestings);
 	printf("\n\nentropy = %.18Lf", entropy_calc(strings_out, strlen(strings_out)));
 	printf("\nlnsha: %.18Lf\n", (long double)lnsha(sha256(argv[1])));

@@ -134,6 +134,7 @@ void tokenize (char *inp, char **tokens) {
 		}
 		
 		while (*p == ' ' || *p == '\t' || *p == '\n') p++;
+		/* one memmory leak per token; stress testing */
 		tokens[i++] = strdup(start);
 
 	}
@@ -253,6 +254,7 @@ int main (int argc, char *argv[]) {
 	printf("\n\nentropy = %.18Lf", entropy_calc(strings_out, strlen(strings_out)));
 	printf("\nlnsha: %.18Lf\n", (long double)lnsha(sha256(argv[1])));
 	printf("Calculated value of e for verification: %.18Lf", compute_e());
+	/* segfault if no second argument, its probably fine */
 	if (strcmp(argv[2] , "--report") == 0) automatic_malware_analysis_report();
 	return 0;
 }

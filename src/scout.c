@@ -28,10 +28,11 @@ char* get_##name (cjs* arr_name) { \
 	for (int i = 0; i < size && i < 20; i++) { \
 		cjs *item = cJSON_GetArrayItem(arr_name , i); \
 		if (cJSON_IsString(item)) { \
-			name_pat[i] = item->valuestring; \
+			name_pat[i] = strdup(item->valuestring); \
  			name_c++; \
 		} \
 	} \
+	return "hehehoho"; \
 }
 GET_JSON_ARR_GEN(flag, flag_pat, flag_c);
 GET_JSON_ARR_GEN(interesting, interesting_pat, interesting_c);
@@ -49,6 +50,8 @@ void read_config (void) {
 	cjs *interesting = cjsGetObjItem(conf_json, "interesting");
 	get_flag(flag);
 	get_interesting(interesting);	
+	cJSON_Delete(flag); // cJSON_Delete(interesting);
+	free(conf_json);
 }
 char* find_needle_in_haystack(const char *haystack, char *out, size_t out_size) {
     size_t len = 0;
@@ -161,6 +164,7 @@ char *strinin(char* filename){
 	}
 	strings_out = out;
 	pclose(pipe);
+	return "return value";
 }
 long double lnsha (char*sha) {
 	long long shasha = (long long)sha;
@@ -188,6 +192,7 @@ void entropy_anal() {
 		entr = entropy_calc(tokens[i], strlen(tokens[i]));
 		if (entr > 5) printf("high entropy of %.18Lf: %s\n", entr, tokens[i]);
 		else if (entr < 3) printf("low entropy of %.18Lf: %s\n", entr, tokens[i]);
+		free(tokens[i]);
 		i++;
 	}
 }
@@ -243,8 +248,8 @@ int main (int argc, char *argv[]) {
 		return 1;
 	}
 	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) printf("%s", HELP);
+	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) return 0;
 	read_config();
-	void * öl;
 	strinin(argv[1]);
 	char *flgs = flganalyze(argv[1], "def", "def");
 	compute_e();
@@ -254,7 +259,18 @@ int main (int argc, char *argv[]) {
 	printf("\n\nentropy = %.18Lf", entropy_calc(strings_out, strlen(strings_out)));
 	printf("\nlnsha: %.18Lf\n", (long double)lnsha(sha256(argv[1])));
 	printf("Calculated value of e for verification: %.18Lf", compute_e());
-	/* segfault if no second argument, its probably fine */
+	if (argv[2]) {
 	if (strcmp(argv[2] , "--report") == 0) automatic_malware_analysis_report();
+	}
+	int i=0;
+	while (interesting_pat[i]) {
+		free(interesting_pat[i]);
+		i++;
+	}
+	i=0;
+	while (flag_pat[i]) {
+		free(flag_pat[i]);
+		i++;
+	}
 	return 0;
 }

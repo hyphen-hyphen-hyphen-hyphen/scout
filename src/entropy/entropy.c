@@ -1,7 +1,7 @@
 /* welcome to the entropy department */
 #include "../mathyy/mathyy.h"
 #include <stddef.h>
-long double entropy_calc (const unsigned char* data, size_t len) {
+long double entropy_calc (char* data, size_t len) {
 	unsigned int freq[256] = {0};
 	/* for (unsigned long long i = 0ULL; i <= 255; i++) {
 		for (unsigned long long j = 0ULL; j<len; j++) {

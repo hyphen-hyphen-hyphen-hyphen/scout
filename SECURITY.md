@@ -6,13 +6,10 @@ If you find any vulnerabilities that arent documented here or in any other docum
 
 ## Known vulnerabilities
 
-### Command injection in `sha256`
-- **Description:** user input from the *filename* argument is passed directly to a shell command without sanitization or escaping.
-- **Impact:** if the user inputs a filename like `\&\& rm -rf \*` it would run the command `rm -rf *`, and that would be bad
-- **status:** no forseable fix, i call this "shell integration".
+### Command injection in `sha256` and `strinin`
 
-### Command injection in `strinin`
-same as in `sha256`, see that
+While i have tried  to fix this, there is still some risk that this is possible, howeaver, i could not give you an example command, as i have not figured out a way.
+Shouldn't be used in secure enviroments.
 
 ### General buffer overflow issues
 Dont even bother with these, also a feature called "memmory usage reduction"

@@ -13,7 +13,6 @@ Scout is a simple CTF analysis program that extracts potential flags and interes
 - Automatic malware analysis report writing with `--report` flag
 - Helpful help message with `--help` flags or no arguments
 - Cutting edge, top of the line features, including `lnsha`, our flagship feature, only one of its kind
-- Shell integration
 - dynamic code
 - gcc only
 
@@ -22,6 +21,10 @@ Scout is a simple CTF analysis program that extracts potential flags and interes
 Run `scout` followed by a filename, and then followed by potential flags, for example `--report`
 example:
 `scout chall --report`
+
+## Errors
+
+The error "What are you even doing?" means you are either trying to exploit command injection, or you are running scout on a file with a bad filename, if so, rename the file to something containing only simple text, like letters[A-Za-z], numbers[0-9], underscores(_) and periods(.).
 
 ## Configuration
 

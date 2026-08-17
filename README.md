@@ -14,14 +14,8 @@ Scout is a simple CTF analysis program that extracts potential flags and interes
 - Helpful help message with `--help` flags or no arguments
 - Cutting edge, top of the line features, including `lnsha`, our flagship feature, only one of its kind
 - Shell integration
-- Efficient memmory usage reduction
 - dynamic code
 - gcc only
-
-# WARNING
-
-***NEVER*** **under any circumstances use the `--help` flag, it is very unstable and unpredictable due to scout:s shell integration.**
-***ALWAYS*** **run scout without command line arguments (like so: `scout`) if you want to see the help message**
 
 # Usage
 
@@ -31,7 +25,7 @@ example:
 
 ## Configuration
 
-Scout is configured via a json file by the name of config.json. This file **must** exist in the working directory, and be populated correctly, otherwise scout *will* segfault.
+Scout is configured via a json file by the name of conf.json. This file **must** exist in the working directory, and be populated correctly, otherwise scout *will* segfault.
 
 ### Configuration guide
 
@@ -69,7 +63,7 @@ See example configuration for more info and json syntax.
 ## Compilation (im sorry)
 
 Run in the projects root directory:
-`gcc -Isrc -lcjson src/scout.c src/mathyy/mathyy.c src/entropy/entropy.c -o scout`
+`gcc -g -Wall -Isrc -lcjson src/scout.c src/mathyy/mathyy.c src/entropy/entropy.c -o scout`
 
 ## gcc *only*
 
@@ -89,8 +83,6 @@ Scout depends on the following:
 
 - For a string with shannon entropy 0, the printed entropy will be -0, this isnt some special kind of entropy, its just 0.
 - `ln` function retuns constant approximately equal to 10.48 for larger values, this causes the `lnsha` function to usually return the same constant. We call this the scout constant.
-- Running with `--help` flag is highly unstable and not supported
-- Multiple memmory leaks, don't fix these, they are required.
 
 # Security policy
 

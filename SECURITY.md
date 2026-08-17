@@ -20,8 +20,6 @@ Dont even bother with these, also a feature called "memmory usage reduction"
 ### UB in `lnsha`
 a pointer is cast to `long long` and then later `long double`. This is UB, but i call this dynamic code, youre never really sure what will happen
 
-### memmory leaks in `read_config` and other functions
-If documented with comments, i already know about it, if not, i also probably know about it
 
 ## Security best practices
 

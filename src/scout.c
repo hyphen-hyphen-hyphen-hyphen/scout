@@ -38,7 +38,6 @@ GET_JSON_ARR_GEN(flag, flag_pat, flag_c);
 GET_JSON_ARR_GEN(interesting, interesting_pat, interesting_c);
 char *strings_out;
 void read_config (void) {
-	/* bunch of memmory leaks in this function. dont fix, load-bearing */
 	FILE *conf = fopen("conf.json", "r");
 	conf ?: exit(EXIT_FAILURE);
 	char buf[1024];
@@ -50,7 +49,7 @@ void read_config (void) {
 	cjs *interesting = cjsGetObjItem(conf_json, "interesting");
 	get_flag(flag);
 	get_interesting(interesting);	
-	cJSON_Delete(flag); // cJSON_Delete(interesting);
+	cJSON_Delete(flag);
 	free(conf_json);
 }
 char* find_needle_in_haystack(const char *haystack, char *out, size_t out_size) {
@@ -137,7 +136,6 @@ void tokenize (char *inp, char **tokens) {
 		}
 		
 		while (*p == ' ' || *p == '\t' || *p == '\n') p++;
-		/* one memmory leak per token; stress testing */
 		tokens[i++] = strdup(start);
 
 	}
@@ -175,7 +173,6 @@ char *strn (char* filename, char* str_opts) {
 	if (strcmp(str_opts, "def") != 0) {
 		goto non_stndrd;
 	}
-	// printf("%s", out);
 	static char flg[22222] = {0};
 	size_t size = sizeof(flg);
 	return find_needle_in_haystack(strings_out, flg, size);
@@ -201,7 +198,6 @@ char *strin (char* filename, char* str_opts) {
 	if (strcmp(str_opts, "def") != 0) {
 		goto non_stndrd;
 	}
-	// printf("%s", out);
 	return strings_out;
 
 non_stndrd:

@@ -169,7 +169,7 @@ long double lnsha (char*sha) {
 	long double lnsasa = ln((long double)shasha);
 	return lnsasa;
 }
-char *strn (char* filename, char* str_opts) {
+char *strn ( char* str_opts) {
 	if (strcmp(str_opts, "def") != 0) {
 		goto non_stndrd;
 	}
@@ -194,7 +194,7 @@ void entropy_anal() {
 	}
 }
 
-char *strin (char* filename, char* str_opts) {
+char *strin (char* str_opts) {
 	if (strcmp(str_opts, "def") != 0) {
 		goto non_stndrd;
 	}
@@ -204,21 +204,21 @@ non_stndrd:
 	return "not implemented";
 }
 
-char* intrest_anal (char* filenam) {
-	char *string = strin(filenam, "def");
+char* intrest_anal () {
+	char *string = strin("def");
 	static char in[222222] = {0};
 	size_t siz = sizeof(in);
 	char *inter = find_other_needle_in_haystack(string, in, siz);
 	return inter;
 }
-char *flganalyze (char *filename, char *anal_opts, char *str_opts) {
+char *flganalyze (char *anal_opts, char *str_opts) {
 	if (anal_opts == NULL || strcmp(anal_opts, "") == 0) {
 		anal_opts = "def";
 	}
 	if (str_opts == NULL || strcmp(str_opts, "") == 0) {
 		str_opts = "def";
 	}
-	char *flags = strn(filename, str_opts);
+	char *flags = strn(str_opts);
 	return flags;
 }
 void automatic_malware_analysis_report() {
@@ -252,6 +252,8 @@ int fix_comm_inject (char *filenam) {
 	return 0xdeadbeef;
 }
 int main (int argc, char *argv[]) {
+	/* to supress unused paramater warning */
+	if (argc == -16) return -16;
 	if (argv[1] == NULL) {
 		printf("%s", HELP);
 		return 1;
@@ -262,12 +264,12 @@ int main (int argc, char *argv[]) {
 	}
 	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) printf("%s", HELP);
 	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) return 0;
-	if (fix_comm_inject(argv[1]) == 0xdeadbeef) {printf("What are you even doing?(if youre actually trying to analyze the file, change the filename to something simple, without weird characters)"); return 0;}
+	if (fix_comm_inject(argv[1]) == (int)0xdeadbeef) {printf("What are you even doing?(if youre actually trying to analyze the file, change the filename to something simple, without weird characters)"); return 0;}
 	read_config();
 	strinin(argv[1]);
-	char *flgs = flganalyze(argv[1], "def", "def");
+	char *flgs = flganalyze("def", "def");
 	compute_e();
-	char *interestings = intrest_anal(argv[1]);
+	char *interestings = intrest_anal();
 	entropy_anal();
 	final_out(flgs, interestings);
 	printf("\n\nentropy = %.18Lf", entropy_calc(strings_out, strlen(strings_out)));

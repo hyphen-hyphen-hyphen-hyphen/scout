@@ -1,6 +1,9 @@
 # Scout
 
-Scout is a simple CTF analysis program that extracts potential flags and interesting strigs from a file. It also does automatic shannon entropy calculations on strings to identify low and high entropy strings. 
+Scout is a simple CTF analysis program that is designed to be the first thing you run on a reverse engineering/forensics CTF.
+
+Short description:\
+Scout extracts potential flags and interesting strings from a file. It also does automatic shannon entropy calculations on strings to identify low and high entropy strings.
 
 ## Features
 

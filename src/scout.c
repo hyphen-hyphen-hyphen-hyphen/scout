@@ -238,13 +238,31 @@ void automatic_malware_analysis_report() {
 	printf("|                                      |\n");
 	printf("----------------------------------------\n");
 }
+int find_sus_inputs (char *filenam) {
+	char *ff[25] = {"`", "&", "|", "\\", ";", "\"", "'", "*", "$", "<", ">", "\n", "\r", "(", ")", "{", "}", "[", "]", "~", "!", "?", "#", " -", " "};
+	for (int i = 0; i < 25; i++) {
+		if (strstr(filenam, ff[i])) return 0xfaac;
+	}
+	return 0xccc;
+}
+int fix_comm_inject (char *filenam) {
+	if (access(filenam, F_OK) == -1) return 0xdeadbeef;
+	if (find_sus_inputs(filenam) == 0xfaac) return 0xdeadbeef;
+	else return 0xcafebabe;
+	return 0xdeadbeef;
+}
 int main (int argc, char *argv[]) {
 	if (argv[1] == NULL) {
 		printf("%s", HELP);
 		return 1;
 	}
+	if (strcmp(argv[1] , "--report") == 0) {
+		printf("%s", HELP);
+		return 1;
+	}
 	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) printf("%s", HELP);
 	if (strcmp(argv[1], "--help_me-please") == 0 || strcmp(argv[1], "--help") == 0) return 0;
+	if (fix_comm_inject(argv[1]) == 0xdeadbeef) {printf("What are you even doing?(if youre actually trying to analyze the file, change the filename to something simple, without weird characters)"); return 0;}
 	read_config();
 	strinin(argv[1]);
 	char *flgs = flganalyze(argv[1], "def", "def");

@@ -56,12 +56,12 @@ The error "What are you even doing?" means you are either trying to exploit comm
 
 ## Configuration
 
-Scout is configured via a json file by the name of conf.json. This file **must** exist in the working directory, and be populated correctly, otherwise scout *will* segfault.
+Scout is configured via a json file by the name of conf.json. This file **must** exist in the working directory, and be populated correctly, otherwise scout *will* fail.
 
 ### Configuration guide
 
 The config file should contain two(2) json arrays by the names of flag and interesting.
-These arrays should contain strings. The file should be no more than 1024 bytes long, or there will be a buffer overflow in the `read_config` function.
+These arrays should contain strings.
 See example configuration for more info and json syntax.
 
 ### example configuration
@@ -94,7 +94,9 @@ See example configuration for more info and json syntax.
 ## Compilation
 
 Run in the projects root directory:
-`gcc -g -Wall -Wextra -Isrc -lcjson src/scout.c src/mathyy/mathyy.c src/entropy/entropy.c -o scout`
+```
+gcc -g -Wall -Wextra -Isrc -lcjson src/scout.c src/mathyy/mathyy.c src/entropy/entropy.c -o scout
+```
 
 ## gcc *only*
 

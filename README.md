@@ -24,22 +24,25 @@ Scout extracts potential flags and interesting strings from a file. It also does
 # Installation
 
 Make sure you have all of the dependencies installed, then:
-
-`curl -fs https://raw.githubusercontent.com/hyphen-hyphen-hyphen-hyphen/scout/refs/heads/trunk/install.sh | sh `
+```sh
+curl -fs https://raw.githubusercontent.com/hyphen-hyphen-hyphen-hyphen/scout/refs/heads/trunk/install.sh | sh
+```
 
 ## I dont like curl and sh
 
-clone this repository as such:
-`git clone https://github.com/hyphen-hyphen-hyphen-hyphen/scout.git`
+```sh
+# clone this repository as such:
+git clone https://github.com/hyphen-hyphen-hyphen-hyphen/scout.git
 
-cd into it:
-`cd scout`
+# cd into it:
+cd scout
 
-Build the package with the makefile:
-`make`
+# Build the package with the makefile:
+make
 
-Install it with the makefile:
-`make install`
+# Install it with the makefile:
+make install
+```
 
 # Usage
 

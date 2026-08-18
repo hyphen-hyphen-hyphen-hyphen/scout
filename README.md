@@ -5,6 +5,8 @@ Scout is a simple CTF analysis program that is designed to be the first thing yo
 Short description:\
 Scout extracts potential flags and interesting strings from a file. It also does automatic shannon entropy calculations on strings to identify low and high entropy strings.
 
+[![asciicast](https://asciinema.org/a/ScO5eRKESbzhbetY.svg)](https://asciinema.org/a/ScO5eRKESbzhbetY)
+
 ## Features
 
 - Advanced pattern matching with patterns from a json config file

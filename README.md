@@ -119,6 +119,18 @@ Scout depends on the following:
 
 see `SECURITY.md`
 
+# Credits
+
+Scout uses [cJSON](https://github.com/DaveGamble/cJSON) for parsing json. cJSON is licensed under the MIT license, which we are compliant with.
+Scout also uses code from the [Vixen shell](https://codeberg.org/senegal_gradient/vixen), another one of my projects made a little less than a year ago.
+Relies on components of the GNU core utils like `strings` and `sha224sum`.
+The vast majority of the code was written by me.
+Generative AI was used for debugging.
+
+## Special thanks
+
+Special thanks to Linus Torvalds and the GNU project for making this at all possible
+
 # Licence
 
 This project is licensed under the GNU GPLv3 licence

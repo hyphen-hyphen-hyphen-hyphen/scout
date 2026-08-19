@@ -8,6 +8,6 @@ scout: src/scout.c
 
 
 install: all
-	install scout /usr/local/bin/scout -m 755
+	install scout /usr/bin/scout -m 755
 
 .PHONY: all install

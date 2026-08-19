@@ -5,7 +5,7 @@ pkgdesc="A CTF analysis tool, written in C"
 arch=("x86_64")
 url="https://github.com/hyphen-hyphen-hyphen-hyphen/scout"
 license=("GPLv3")
-depends=("gcc" "cjson" "glibc")
+depends=("gcc" "cjson" "glibc" "coreutils")
 sha256sums=("SKIP")
 source=("scout-v${pkgver}.tar.gz::https://github.com/hyphen-hyphen-hyphen-hyphen/scout/archive/refs/tags/v1.0.0.tar.gz")
 package() {

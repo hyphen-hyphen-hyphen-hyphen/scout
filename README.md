@@ -7,6 +7,22 @@ Scout extracts potential flags and interesting strings from a file. It also does
 
 [![asciicast](https://asciinema.org/a/ScO5eRKESbzhbetY.svg)](https://asciinema.org/a/ScO5eRKESbzhbetY)
 
+### Quick Start
+
+Run scout on any file:
+
+```bash
+scout /path/to/file
+```
+
+Generate a full report:
+
+```bash
+scout /path/to/file --report
+```
+
+Make sure you have a `conf.json` file in your working directory. See [Configuration](#configuration) for setup, or use the example below.
+
 ## Features
 
 - Advanced pattern matching with patterns from a json config file
